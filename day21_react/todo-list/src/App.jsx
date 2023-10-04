@@ -1,10 +1,12 @@
 import "./App.css";
-import Toggle from "./components/Toggle";
+import TodoItem from "./components/TodoItem";
 
 function App() {
 	return (
 		<>
-			<Toggle />
+			<TodoItem text="take out the trash" />
+			<TodoItem text="buy vegetables" />
+			<TodoItem text="pay the bill" />
 		</>
 	);
 }

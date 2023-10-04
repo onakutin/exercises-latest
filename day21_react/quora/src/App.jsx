@@ -1,5 +1,7 @@
 import "./App.css";
+import { Fragment } from "react";
 import Answer from "./components/Answer";
+import { NewAnswer } from "./components/NewAnswer";
 import Question from "./components/Question";
 
 function App() {
@@ -24,22 +26,15 @@ function App() {
 	return (
 		<>
 			<div className="question">
-				<Question title={data[0].title} question={data[0].question} />
-				<Answer answer={data[0].answer[0]} />
-				<Answer answer={data[0].answer[1]} />
-				<Answer answer={data[0].answer[2]} />
-			</div>
-			<div className="question">
-				<Question title={data[1].title} question={data[1].question} />
-				<Answer answer={data[1].answer[0]} />
-				<Answer answer={data[1].answer[1]} />
-				<Answer answer={data[1].answer[2]} />
-			</div>
-			<div className="question">
-				<Question title={data[2].title} question={data[2].question} />
-				<Answer answer={data[2].answer[0]} />
-				<Answer answer={data[2].answer[1]} />
-				<Answer answer={data[2].answer[2]} />
+				{data.map((question) => (
+					<Fragment key={question.title}>
+						<Question title={question.title} question={question.question} />
+						{question.answer.map((answer, i) => (
+							<Answer key={`${question.title}_${i}`} answer={answer} />
+						))}
+						<NewAnswer />
+					</Fragment>
+				))}
 			</div>
 		</>
 	);

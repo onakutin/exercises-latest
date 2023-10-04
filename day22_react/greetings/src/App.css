@@ -1,0 +1,19 @@
+#root {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2rem;
+	text-align: center;
+}
+
+form {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 50%;
+}
+
+label {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
