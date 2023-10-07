@@ -1,20 +1,27 @@
 <?php
-
-var_dump($_GET);
-
 include('data.php');
 include('functions.php');
 
 $columns = [
-    'title' => 'Movie title',
+    'title' => 'Movie Title',
     'rating' => 'Rating',
-    'year' => 'Release year'
+    'year' => 'Release Year'
 ];
 
-$sort_by = $_GET['sortby'] ?? 'title';
-$sort_way = $_GET['sortway'] ?? 'asc';
+if (isset($_GET['orderby'])) {
+    $orderby = $_GET['orderby'];
+} else {
+    $orderby = 'title';
+}
+;
+if (isset($_GET['orderway'])) {
+    $orderway = $_GET['orderway'];
+} else {
+    $orderway = 'asc';
+}
+;
 
-$sorted_movies = sortMovies($movies, $sort_by, $sort_way);
+$sorted_movies = sortMovies($movies, $orderby, $orderway);
 
 ?>
 
@@ -25,37 +32,36 @@ $sorted_movies = sortMovies($movies, $sort_by, $sort_way);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sort movies with _GET</title>
+    <title>Sort Movies with _GET</title>
+
     <style>
         th,
         td {
-            border: solid 1px black;
-            padding: 0.5rem 1.5rem;
+            border: 1px solid silver;
+            padding: 0.25em 0.5em;
         }
     </style>
 </head>
 
 <body>
-    <h1>I can sort movies like this</h1>
     <table>
         <thead>
             <tr>
                 <?php foreach ($columns as $key => $column): ?>
-
                     <th>
-                        <?php if ($_GET['sortby'] === $key): ?>
-                            <?php if ($_GET['sortway'] === 'asc'): ?>
-                                <a href="?sortby=<?= $key ?>&sortway=desc">
+                        <?php if ($orderby === $key): ?>
+                            <?php if ($orderway === 'asc'): ?>
+                                <a href="?orderby=<?= $key ?>&orderway=desc">
                                 <?php else: ?>
-                                    <a href="?sortby=<?= $key ?>&sortway=asc">
+                                    <a href="?orderby=<?= $key ?>&orderway=asc">
                                     <?php endif; ?>
                                 <?php else: ?>
-                                    <a href="?sortby=<?= $key ?>&sortway=asc">
+                                    <a href="?orderby=<?= $key ?>&orderway=asc">
                                     <?php endif; ?>
+
                                     <?= $column ?>
                                 </a>
                     </th>
-
                 <?php endforeach; ?>
             </tr>
         </thead>
@@ -64,11 +70,10 @@ $sorted_movies = sortMovies($movies, $sort_by, $sort_way);
                 <tr>
                     <?php foreach ($movie as $detail): ?>
                         <td>
-
                             <?= $detail ?>
                         </td>
+                    <?php endforeach ?>
 
-                    <?php endforeach; ?>
                 </tr>
             <?php endforeach; ?>
         </tbody>
