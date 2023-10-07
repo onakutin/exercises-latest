@@ -11,3 +11,15 @@ function return_color($i)
     }
     return $color;
 }
+
+function return_player($i)
+{
+    $player = '';
+
+    if ($i === 25) {
+        $player = '<img src="https://classes.codingbootcamp.cz/assets/classes/33/pieces/whites/king.png" />';
+    } elseif ($i === 61) {
+        $player = '<img src="https://classes.codingbootcamp.cz/assets/classes/33/pieces/whites/queen.png" />';
+    }
+    return $player;
+}
