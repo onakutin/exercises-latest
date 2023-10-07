@@ -1,3 +1,6 @@
+<?php require 'functions.php' ?>
+
 <footer>
-        © 2016 Me &amp; myself
-    </footer>
+    ©
+    <?= get_current_year() ?> Me &amp; myself
+</footer>
