@@ -1,55 +1,84 @@
 <?php
+include('data.php');
+include('functions.php');
 
-include 'data.php';
-include_once 'functions.php';
+$columns = [
+    'title' => 'Movie Title',
+    'rating' => 'Rating',
+    'year' => 'Release Year'
+];
 
-$orderby = $_GET['orderby'] ?? 'title';
-$orderway = $_GET['orderby'] ?? 'title';
-
-
-var_dump($movies);
+if (isset($_GET['orderby'])) {
+    $orderby = $_GET['orderby'];
+} else {
+    $orderby = 'title';
+}
+;
+if (isset($_GET['orderway'])) {
+    $orderway = $_GET['orderway'];
+} else {
+    $orderway = 'asc';
+}
+;
 
 $sorted_movies = sortMovies($movies, $orderby, $orderway);
-
-var_dump($sorted_movies);
-
-
-
-
-    
-$query_string = http_build_query($movies);
-
 
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Use GET to sort</title>
+    <title>Sort Movies with _GET</title>
+
+    <style>
+        th,
+        td {
+            border: 1px solid silver;
+            padding: 0.25em 0.5em;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>MOVIES</h1>
-    <a href="?orderby=title&orderway=asc">Order by title (asc)</a>
-    <a href="?orderby=title&orderway=desc">Order by title (desc)</a>
-    <a href="?orderby=year&orderway=asc">Order by year (asc)</a>
-    <a href="?orderby=year&orderway=desc">Order by year (desc)</a>
-    <a href="?orderby=rating&orderway=asc">Order by rating (asc)</a>
-    <a href="?orderby=rating&orderway=desc">Order by rating (desc)</a>
-    
+    <table>
+        <thead>
+            <tr>
+                <?php foreach ($columns as $key => $column): ?>
+                    <th>
+                        <?php if ($orderby === $key): ?>
+                            <?php if ($orderway === 'asc'): ?>
+                                <a href="?orderby=<?= $key ?>&orderway=desc">
+                                <?php else: ?>
+                                    <a href="?orderby=<?= $key ?>&orderway=asc">
+                                    <?php endif; ?>
+                                <?php else: ?>
+                                    <a href="?orderby=<?= $key ?>&orderway=asc">
+                                    <?php endif; ?>
 
+                                    <?= $column ?>
+                                </a>
+                    </th>
+                <?php endforeach; ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($sorted_movies as $movie): ?>
+                <tr>
+                    <?php foreach ($movie as $detail): ?>
+                        <td>
+                            <?= $detail ?>
+                        </td>
+                    <?php endforeach ?>
 
-    <ul>
-        <?php
-        foreach($sorted_movies as $movie) : ?>
-        <li>
-            Title: <?= $movie['title']?><br>
-            Rating: <?= $movie['rating']?><br>
-            Released: <?= $movie['year']?></li>
+                </tr>
             <?php endforeach; ?>
-    </ul>
-    
+        </tbody>
+    </table>
+
 </body>
+
 </html>
