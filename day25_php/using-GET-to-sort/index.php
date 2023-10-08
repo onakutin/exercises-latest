@@ -1,20 +1,17 @@
 <?php
+include 'data.php';
+include 'functions.php';
 
-var_dump($_GET);
+$sortby = $_GET['sortby'] ?? 'title';
+$sortway = $_GET['sortway'] ?? 'asc';
 
-include('data.php');
-include('functions.php');
+$sortedMovies = sortMovies($movies, $sortby, $sortway);
 
 $columns = [
-    'title' => 'Movie title',
-    'rating' => 'Rating',
-    'year' => 'Release year'
+    'title' => 'Movie Title',
+    'rating' => "Rating",
+    'year' => 'Year of Release'
 ];
-
-$sort_by = $_GET['sortby'] ?? 'title';
-$sort_way = $_GET['sortway'] ?? 'asc';
-
-$sorted_movies = sortMovies($movies, $sort_by, $sort_way);
 
 ?>
 
@@ -37,37 +34,31 @@ $sorted_movies = sortMovies($movies, $sort_by, $sort_way);
 
 <body>
     <h1>I can sort movies like this</h1>
+
     <table>
         <thead>
             <tr>
                 <?php foreach ($columns as $key => $column): ?>
-
                     <th>
-                        <?php if ($_GET['sortby'] === $key): ?>
-                            <?php if ($_GET['sortway'] === 'asc'): ?>
-                                <a href="?sortby=<?= $key ?>&sortway=desc">
-                                <?php else: ?>
-                                    <a href="?sortby=<?= $key ?>&sortway=asc">
-                                    <?php endif; ?>
-                                <?php else: ?>
-                                    <a href="?sortby=<?= $key ?>&sortway=asc">
-                                    <?php endif; ?>
-                                    <?= $column ?>
-                                </a>
-                    </th>
+                        <?php if ($sortby === $key && $sortway === 'asc'): ?>
+                            <a href="?sortby=<?= $key ?>&sortway=desc">
+                            <?php else: ?>
+                                <a href="?sortby=<?= $key ?>&sortway=asc">
+                                <?php endif; ?>
+                                <?= $column ?>
+                            </a>
 
+                    </th>
                 <?php endforeach; ?>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($sorted_movies as $movie): ?>
+            <?php foreach ($sortedMovies as $movie): ?>
                 <tr>
                     <?php foreach ($movie as $detail): ?>
                         <td>
-
                             <?= $detail ?>
                         </td>
-
                     <?php endforeach; ?>
                 </tr>
             <?php endforeach; ?>

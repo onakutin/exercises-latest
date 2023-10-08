@@ -1,0 +1,20 @@
+<?php
+
+function literInBottle($radius, $height)
+{
+    return $radius ** 2 * 3.1416 * $height / 1000;
+}
+
+// Put your function here
+
+$radius = null;
+do {
+    $radius = readline("Please enter the radius: ");
+} while ($radius == null);
+
+$height = null;
+do {
+    $height = readline("Please enter the heigth: ");
+} while ($height == null);
+
+echo literInBottle($radius, $height);
