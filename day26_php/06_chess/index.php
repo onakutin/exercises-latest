@@ -3,11 +3,26 @@
 include 'Piece.php';
 include 'Square.php';
 
+$letters = range('a', 'h');
+foreach ($letters as $letter) {
+    for ($i = 1; $i < 9; $i++) {
+        return '$' . $letter . $i;
+    }
+}
+
+
+
 $black_pawn = new Piece('p');
 $white_queen = new Piece('Q');
 
 echo $black_pawn;
 echo $white_queen;
+
+// for($i='a'; $i<'i'; $i++){
+//     for($j=1; $j<9; $j++){
+
+//     }
+// }
 
 $a2 = new Square(1, 2);
 $b2 = new Square(2, 2, $white_queen);
@@ -32,10 +47,28 @@ echo $d2;
         body {
             background-color: lightgrey;
         }
+
+        .dark {
+            background-color: black;
+        }
+
+        .square {
+            height: 30px;
+            width: 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .light {
+            background-color: lightcyan;
+        }
     </style>
 </head>
 
 <body>
+
 
 </body>
 

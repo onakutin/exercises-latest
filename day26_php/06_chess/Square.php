@@ -22,6 +22,6 @@ class Square
 
     public function __toString()
     {
-        return '<div class="' . ($this->isDark() ? 'dark' : 'light') . '">' . $this->piece . '</div>';
+        return '<div class="square ' . ($this->isDark() ? 'dark' : 'light') . '">' . $this->piece . '</div>';
     }
 }
