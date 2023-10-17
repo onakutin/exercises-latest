@@ -1,6 +1,6 @@
 <?php
 
-require_once 'bootstrap.php';
+require_once '../lib/bootstrap.php';
 
 $cities = DB::select('
 SELECT *

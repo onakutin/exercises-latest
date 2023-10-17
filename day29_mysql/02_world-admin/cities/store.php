@@ -1,6 +1,7 @@
 <?php
 
-require_once 'bootstrap.php';
+require_once '../lib/bootstrap.php';
+
 
 $id = $_GET['id'] ?? null;
 
@@ -17,14 +18,11 @@ if (empty($_POST['district'])) {
     $valid = false;
     $errors[] = 'District is a required field';
 }
-if (empty($_POST['country_id'])) {
-    $valid = false;
-    $errors[] = 'Country id is a required field';
-}
-if (empty($_POST['population'])) {
-    $valid = false;
-    $errors[] = 'Population is a required field';
-} elseif (!is_numeric($_POST['population'])) {
+// if (empty($_POST['country_id'])) {
+//     $valid = false;
+//     $errors[] = 'Country id is a required field';
+// }
+if (!is_numeric($_POST['population']) && !empty($_POST['population'])) {
     $valid = false;
     $errors[] = 'Population must be a number';
 }
@@ -32,7 +30,7 @@ if (empty($_POST['population'])) {
 
 
 if (!$valid) {
-    session()->flash('errors', $errors);
+    session()->flash('error_messages', $errors);
     if ($id) {
         header('Location: edit.php?id=' . $id);
 
@@ -64,6 +62,8 @@ $city->district = $_POST['district'];
 $city->country_id = $_POST['country_id'];
 $city->population = $_POST['population'];
 
+// var_dump($city->id);
+// die();
 
 if (!$id) {
     DB::insert('
@@ -82,7 +82,8 @@ if (!$id) {
     `country_id` = ?,
     `district` = ?,
     `population` = ?
-    ', [$city->name, $city->country_id, $city->district, $city->population]);
+    WHERE `id` = ?
+    ', [$city->name, $city->country_id, $city->district, $city->population, $city->id]);
 }
 
 session()->flash('success_message', 'The record was successfully saved');

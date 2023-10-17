@@ -1,6 +1,6 @@
 <?php
 
-require_once 'bootstrap.php';
+require_once '../lib/bootstrap.php';
 
 $id = $_GET['id'] ?? null;
 
@@ -44,7 +44,7 @@ if (!$id) {
 
     <a href="list.php">Back to list</a>
 
-    <?php include 'alerts.php'; ?>
+    <?php include '../components/alerts.php'; ?>
 
     <?php if ($id): ?>
         <form action="store.php?id=<?= $id ?>" method="post">
@@ -52,7 +52,7 @@ if (!$id) {
             <form action="store.php" method="post">
             <?php endif; ?>
 
-            <input id="id" name="id" type="hidden" value="<?= $city->id ?>" />
+            <!-- <input id="id" name="id" type="hidden" value="<?= $city->id ?>" /> -->
 
             Name:<br>
             <input type=" text" name="name" value="<?= htmlspecialchars((string) old('name', $city->name)) ?>"><br>
