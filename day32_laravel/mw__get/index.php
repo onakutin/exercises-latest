@@ -21,7 +21,6 @@ $values = ['CZ'];
 // run the query, get a Country object
 $country = DB::selectOne($query, $values, 'Country');
 
-var_dump($country->cities);
 
 // display the output
 include 'view.php';

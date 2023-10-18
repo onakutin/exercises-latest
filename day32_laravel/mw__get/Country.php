@@ -19,7 +19,7 @@ class Country
     public function __get($property_name)
 
 {
-    if($property_name === 'Cities'){
+    if($property_name === 'cities'){
         // if 'cities' was not yet filled into relations
         // = a database query was not yet made
         if (!array_key_exists('cities', $this->relations)) {
@@ -29,7 +29,7 @@ class Country
         }
 
         // ALLWAYS - return what we have in relations['cities']
-        return $this->cities;
+        return $this->relations['cities'];
     }
  
 
