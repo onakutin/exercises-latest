@@ -1,0 +1,25 @@
+.ruler {
+    display: flex;
+}
+
+.section {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    border-left: 1px solid black;
+    height: 0.4em;
+}
+
+.section--middle {
+    height: 0.8em;
+}
+
+.section--cm {
+    height: 1.4em;
+}
+
+.section__number {
+    display: block;
+    position: relative;
+    top: 1.75em;
+    left: -0.25em;
+}

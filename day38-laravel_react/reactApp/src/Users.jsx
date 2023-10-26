@@ -13,7 +13,7 @@ function UserList() {
 	const loadUsers = async () => {
 		setLoading(true);
 
-		const response = await fetch(`http://laravel-books.test/api/users`);
+		const response = await fetch(`http://www.laravel-books.test/api/users`);
 
 		setLoading(false);
 
