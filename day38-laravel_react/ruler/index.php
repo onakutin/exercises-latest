@@ -1,8 +1,8 @@
 <?php
 
-$size = $_GET['size'] ?: 2;
-$cmLength = $_GET['cmLength'] ?: 40;
-$sections = $_GET['sections'] ?: 10;
+$size = isset($_GET['size']) && $_GET['size'] !== '' ? $_GET['size'] : 2;
+$cmLength = isset($_GET['cmLength']) && $_GET['cmLength'] !== '' ? $_GET['cmLength'] : 40;
+$sections = isset($_GET['sections']) && $_GET['sections'] !== '' ? $_GET['sections'] : 10;
 
 ?>
 
