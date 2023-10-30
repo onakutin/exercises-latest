@@ -6,15 +6,15 @@ const Link = ({ url, text }) => {
 	const handleClick = (e) => {
 		if (state === "stay") {
 			e.preventDefault();
-			setState((state = "leave"));
+			setState("leave");
 		} else if (state === "leave") {
-			setState((state = "stay"));
+			setState("stay");
 		}
 	};
 	return (
 		<>
 			{state === "leave" ? <p>Do you really wanna leave?</p> : null}
-			<a onClick={handleClick} className="link" href={url}>
+			<a onClick={handleClick} className="link" href={url} target="blank">
 				{text}
 			</a>
 		</>

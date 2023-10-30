@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import "./App.css";
 import Link from "./components/Link";
 
@@ -17,16 +18,17 @@ function App() {
 		},
 	];
 
-	return (
-		<>
-			<Link url={data[0].url} text={data[0].text} />
+	return data.map((link, i) => (
+		<Fragment key={`${link.url}_${i}`}>
+			<Link url={link.url} text={link.text} />
 			<br />
-			<Link url={data[1].url} text={data[1].text} />
-			<br />
-			<Link url={data[2].url} text={data[2].text} />
-			<br />
-		</>
-	);
+		</Fragment>
+	));
+	// 		<Link url={data[1].url} text={data[1].text} />
+	// 		<br />
+	// 		<Link url={data[2].url} text={data[2].text} />
+	// 		<br />
+	// );
 }
 
 export default App;
